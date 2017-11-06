@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BO;
+package BO.Handlers;
+
+import UI.Beans.LogBean;
 
 /**
  *
  * @author Niklas
  */
-public class temp1 {
-    
+public class LogHandler {
+    public static void addPostToLog(LogBean bean) {
+        // to database
+    }
 }

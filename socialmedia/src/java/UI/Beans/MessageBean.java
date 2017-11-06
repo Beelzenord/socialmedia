@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DB;
+package UI.Beans;
 
 /**
  *
  * @author Niklas
  */
-public class temp2 {
+public class MessageBean {
     
 }
