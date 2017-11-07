@@ -70,6 +70,9 @@ public class UsersBean {
     public void addUser(){
         UsersHandler.addUser(this);
     }
+    public String logUser(){
+       return UsersHandler.loginUser(this);
+    }
     
     public void getUsersById() {
         UsersHandler.getUsersById(this);

@@ -20,7 +20,7 @@ import javax.persistence.Persistence;
  */
 public class MainForTesting {
     public static void main(String[] args) {
-        /*        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacePU");
+         /*      EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacePU");
         EntityManager em = emf.createEntityManager();
         Messages m = new Messages();
         m.setMessageText("testtext");
@@ -50,9 +50,9 @@ public class MainForTesting {
             if (em != null) {
                 em.close();
             }
-        }*/
+        }
         System.out.println("dones");
-        
+        */
         UsersBean b = new UsersBean();
         b.setUsername("u1");
         b.getUsersByUsername();

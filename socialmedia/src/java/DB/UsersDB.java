@@ -8,6 +8,7 @@ package DB;
 import BO.Entity.Users;
 import java.util.Collection;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -27,6 +28,13 @@ public class UsersDB {
                 em.close();
             }
         }
+    }
+    public static Users loginUser(Users u){
+         EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
+         Query q = em.createNamedQuery("Users.findByName");
+         q.setParameter("name", u.getUsername());
+         Users user = (Users) q.getSingleResult();
+         return user;
     }
     
     public static Collection<Users> getUsersById(int id) {
