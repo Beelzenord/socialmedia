@@ -20,6 +20,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
@@ -27,6 +29,11 @@ import javax.persistence.OrderBy;
  *
  * @author fauzianordlund
  */
+@NamedQueries({    
+    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),    
+    @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),    
+    @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.username = :name"),    
+})
 @Entity
 @Table(name="T_Users")
 public class Users implements Serializable {
@@ -38,7 +45,7 @@ public class Users implements Serializable {
     private String username;
     private String pass;
     private String occupation;
-    private Date time;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")    
     @OrderBy("timesent DESC")
     private Collection<Messages> messages;
@@ -72,11 +79,11 @@ public class Users implements Serializable {
         return username;
     }
 
-    public Collection getMessages() {
+    public Collection<Messages> getMessages() {
         return messages;
     }
 
-    public void setMessages(Collection messages) {
+    public void setMessages(Collection<Messages> messages) {
         this.messages = messages;
     }
 
@@ -91,6 +98,15 @@ public class Users implements Serializable {
     public void setPass(String pass) {
         this.pass = pass;
     }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
     
 
     @Override

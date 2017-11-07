@@ -3,17 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.Beans;
+package BO.Entity;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Niklas
  */
-public class LogBean {
+@Entity
+@Table(name="T_PersonalLog")
+public class PersonalLog {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String text;
     private Date timePosted;
+
+    public PersonalLog() {
+    }
 
     public String getText() {
         return text;
@@ -29,9 +42,5 @@ public class LogBean {
 
     public void setTimePosted(Date timePosted) {
         this.timePosted = timePosted;
-    }
-    
-    public static void addPost() {
-        // call LogHandler
     }
 }

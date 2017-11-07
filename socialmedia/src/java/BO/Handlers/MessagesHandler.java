@@ -5,14 +5,10 @@
  */
 package BO.Handlers;
 
-import UI.Beans.LogBean;
-
 /**
  *
  * @author Niklas
  */
-public class LogHandler {
-    public static void addPostToLog(LogBean bean) {
-        // to database
-    }
+public class MessagesHandler {
+    
 }

@@ -5,10 +5,12 @@
  */
 package UI.Beans;
 
+import java.util.Collection;
+
 /**
  *
  * @author Niklas
  */
 public class MessageBean {
-    
+    private Collection<String> messages;
 }

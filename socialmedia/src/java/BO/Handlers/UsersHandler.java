@@ -20,4 +20,16 @@ public class UsersHandler {
         user.setPass(userBean.getPass());
         UsersDB.addNewUser(user);
     }
+    
+    public static void getUsersById(UsersBean b) {
+        UsersDB.getUsersById(b.getId());
+    }
+    
+    public static void getAllUsers() {
+        UsersDB.getAllUsers();
+    }
+    
+    public static void getUsersByUsername(UsersBean b) {
+        UsersDB.getUsersByUsername(b.getUsername());
+    }
 }
