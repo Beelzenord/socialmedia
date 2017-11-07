@@ -43,4 +43,19 @@ public class PersonalLog {
     public void setTimePosted(Date timePosted) {
         this.timePosted = timePosted;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonalLog{" + "id=" + id + ", text=" + text + ", timePosted=" + timePosted + '}';
+    }
+    
+    
 }

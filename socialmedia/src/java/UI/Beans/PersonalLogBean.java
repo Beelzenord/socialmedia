@@ -7,11 +7,15 @@ package UI.Beans;
 
 import BO.Handlers.PersonalLogHandler;
 import java.util.Date;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author Niklas
  */
+@ManagedBean
+@SessionScoped
 public class PersonalLogBean {
     private String text;
     private Date timePosted;

@@ -5,6 +5,7 @@
  */
 package UI.Beans;
 
+import BO.Entity.Users;
 import BO.Handlers.UsersHandler;
 import java.util.Collection;
 import javax.faces.bean.ManagedBean;
@@ -82,7 +83,19 @@ public class UsersBean {
         UsersHandler.addUser(this);
     }
     public String logUser(){
-       return UsersHandler.loginUser(this);
+        
+       //return UsersHandler.loginUser(this);
+        Users Real = UsersHandler.loginUser(this);
+        
+       if(Real!=null){
+           this.id = Real.getId();
+           this.occupation = Real.getOccupation();
+           this.username = Real.getUsername();
+            return "main";
+        }
+        else{
+            return "failure";
+        }
     }
     
     public void getUsersById() {

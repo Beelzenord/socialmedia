@@ -23,18 +23,13 @@ public class UsersHandler {
         user.setOccupation(userBean.getOccupation());
         UsersDB.addNewUser(user);
     }
-    public static String loginUser(UsersBean userBean){
+    public static Users loginUser(UsersBean userBean){
         Users user = new Users();
         user.setUsername(userBean.getUsername());
         user.setPass(userBean.getPass());
         Users Real = UsersDB.loginUser(user);
-        
-        if(Real!=null){
-            return "index";
-        }
-        else{
-            return "failure";
-        }
+        return Real;
+
         
     }
     
