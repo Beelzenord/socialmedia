@@ -32,7 +32,8 @@ import javax.persistence.OrderBy;
 @NamedQueries({    
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),    
     @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),    
-    @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.username = :name"),    
+    @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.username = :name"), 
+    @NamedQuery(name = "Users.findByContains", query = "SELECT u FROM Users u WHERE u.username LIKE :searchString"), 
 })
 @Entity
 @Table(name="T_Users")

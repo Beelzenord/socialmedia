@@ -8,6 +8,7 @@ package UI.Beans;
 import BO.Handlers.MessagesHandler;
 import java.util.Collection;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -18,7 +19,9 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class MessageBean {
     private int id;
+    @ManagedProperty(value="#{sender}")
     private UsersBean sender;
+    @ManagedProperty(value="#{receiver}")
     private UsersBean receiver;
     private String messageText;
 

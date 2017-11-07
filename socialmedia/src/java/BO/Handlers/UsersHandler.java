@@ -42,16 +42,29 @@ public class UsersHandler {
         return UsersDB.getUserById(b.getId());
     }
     
-    public static void getUsersById(UsersBean b) {
-        UsersDB.getUsersById(b.getId());
-    }
-    
     public static void getAllUsers() {
         UsersDB.getAllUsers();
     }
     
     public static Collection<UsersBean> getUsersByUsername(UsersBean b) {
-        Collection<Users> users = UsersDB.getUsersByUsername(b.getUsername());
+        Collection<Users> users = UsersDB.getUsersByUsername(b.getSearchForUser());
+        Collection<UsersBean> usersBean = new ArrayList();
+        for (Users u : users) {
+            UsersBean tmp = new UsersBean();
+            tmp.setUsername(u.getUsername());
+            tmp.setId(u.getId());
+            tmp.setOccupation(u.getOccupation());
+            usersBean.add(tmp);
+        }
+        return usersBean;
+    }
+    
+    public static Collection<UsersBean> getUsersByContains(UsersBean b) {
+        Collection<Users> users = UsersDB.getUsersByContains(b.getSearchForUser());
+        return toUsersBean(users);
+    }
+    
+    public static Collection<UsersBean> toUsersBean (Collection<Users> users) {
         Collection<UsersBean> usersBean = new ArrayList();
         for (Users u : users) {
             UsersBean tmp = new UsersBean();

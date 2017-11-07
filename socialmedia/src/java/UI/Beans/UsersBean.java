@@ -21,6 +21,7 @@ public class UsersBean {
     private String username;
     private String pass;
     private String occupation;
+    private String searchForUser;
     private Collection<MessageBean> messages;
     private Collection<UsersBean> otherUsers;
     
@@ -62,6 +63,14 @@ public class UsersBean {
         this.username = username;
     }
 
+    public String getSearchForUser() {
+        return searchForUser;
+    }
+
+    public void setSearchForUser(String searchForUser) {
+        this.searchForUser = searchForUser;
+    }
+
     public String getPass() {
         return pass;
     }
@@ -85,10 +94,6 @@ public class UsersBean {
        return UsersHandler.loginUser(this);
     }
     
-    public void getUsersById() {
-        UsersHandler.getUsersById(this);
-    }
-    
     public void getAllUsers() {
         UsersHandler.getAllUsers();
     }
@@ -97,7 +102,8 @@ public class UsersBean {
         otherUsers = UsersHandler.getUsersByUsername(this);
     }
     
-    public void getMessagesFromUser() {
-        //MessagesHandler.getMessagesFromUser()
+    public void getUsersByContains() {
+        otherUsers = UsersHandler.getUsersByContains(this);
     }
+    
 }

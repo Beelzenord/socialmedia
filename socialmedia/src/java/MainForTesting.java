@@ -57,9 +57,10 @@ public class MainForTesting {
         */
         UsersBean b = new UsersBean();
         b.setUsername("u1");
-        b.getUsersByUsername();
+        b.setSearchForUser("u1");
+        b.getUsersByContains();
         
-        System.out.println("lulul");
+        System.out.println("lulul: " + b.getOtherUsers().size());
         Collection<UsersBean> t = b.getOtherUsers();
         for (UsersBean a : t) {
             System.out.println("test: " + a.getUsername());
@@ -67,6 +68,7 @@ public class MainForTesting {
         
         System.out.println("again");
         
+        /*
         MessageBean mb = new MessageBean();
         mb.getMessagesFromAll(2);
         Collection<MessageBean> test = mb.getMessages();
@@ -88,6 +90,7 @@ public class MainForTesting {
             System.out.println("messages: " + q.getMessageText());
         }
         */
+        
         System.exit(0);
     }
 }
