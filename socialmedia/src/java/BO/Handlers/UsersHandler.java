@@ -20,7 +20,22 @@ public class UsersHandler {
         Users user = new Users();
         user.setUsername(userBean.getUsername());
         user.setPass(userBean.getPass());
+        user.setOccupation(userBean.getOccupation());
         UsersDB.addNewUser(user);
+    }
+    public static String loginUser(UsersBean userBean){
+        Users user = new Users();
+        user.setUsername(userBean.getUsername());
+        user.setPass(userBean.getPass());
+        Users Real = UsersDB.loginUser(user);
+        
+        if(Real!=null){
+            return "index";
+        }
+        else{
+            return "failure";
+        }
+        
     }
     
     public static Users getUserById(UsersBean b) {
