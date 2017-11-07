@@ -1,7 +1,9 @@
 
 import BO.Entity.Messages;
 import BO.Entity.Users;
+import UI.Beans.MessageBean;
 import UI.Beans.UsersBean;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.EntityManager;
@@ -50,14 +52,42 @@ public class MainForTesting {
             if (em != null) {
                 em.close();
             }
-        }*/
+        }
         System.out.println("dones");
         
         UsersBean b = new UsersBean();
         b.setUsername("u1");
         b.getUsersByUsername();
         
+        System.out.println("lulul");
+        Collection<UsersBean> t = b.getOtherUsers();
+        for (UsersBean a : t) {
+            System.out.println("test: " + a.getUsername());
+        }
+        
         System.out.println("again");
+        
+        MessageBean mb = new MessageBean();
+        mb.getMessagesFromAll(2);
+        Collection<MessageBean> test = mb.getMessages();
+        for (MessageBean q : test) {
+            System.out.println("messages: " + q.getMessageText());
+        }
+        mb.setMessageText("newtest1");
+        UsersBean re = new UsersBean();
+        re.setId(2);
+        UsersBean se = new UsersBean();
+        se.setId(1);
+        mb.setReceiver(re);
+        mb.setSender(se);
+        mb.addNewMessage();
+        
+        mb.getMessagesFromAll(2);
+        test = mb.getMessages();
+        for (MessageBean q : test) {
+            System.out.println("messages: " + q.getMessageText());
+        }
+        */
         System.exit(0);
     }
 }

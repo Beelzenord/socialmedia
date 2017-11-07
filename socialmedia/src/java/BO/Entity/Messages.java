@@ -12,11 +12,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author Niklas
  */
+@NamedQueries({    
+    @NamedQuery(name = "Messages.findFromAll", query = "SELECT m FROM Messages m WHERE m.receiver.id = :Receiver_id"), 
+    @NamedQuery(name = "Messages.findFromOneSender", query = "SELECT m FROM Messages m WHERE m.receiver.id = :Receiver_id AND m.receiver.id = :Sender_id"),
+})
 @Entity
 @Table(name="T_Messages")
 public class Messages {

@@ -29,6 +29,13 @@ public class UsersDB {
         }
     }
     
+    public static Users getUserById(int id) {
+        EntityManager em = getEntityManager();
+        Users tmp = em.find(Users.class, id);
+        em.close();
+        return tmp;
+    }
+    
     public static Collection<Users> getUsersById(int id) {
         EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
         Query q = em.createNamedQuery("Users.findById");
@@ -58,5 +65,9 @@ public class UsersDB {
             System.out.println("names: " + uw.getUsername());
         }
         return tmp;
+    }
+    
+    private static EntityManager getEntityManager() {
+        return Persistence.createEntityManagerFactory("FacePU").createEntityManager();
     }
 }

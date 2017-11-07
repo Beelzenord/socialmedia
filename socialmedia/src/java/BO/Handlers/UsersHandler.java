@@ -8,6 +8,8 @@ package BO.Handlers;
 import DB.UsersDB;
 import UI.Beans.UsersBean;
 import BO.Entity.Users;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -21,6 +23,10 @@ public class UsersHandler {
         UsersDB.addNewUser(user);
     }
     
+    public static Users getUserById(UsersBean b) {
+        return UsersDB.getUserById(b.getId());
+    }
+    
     public static void getUsersById(UsersBean b) {
         UsersDB.getUsersById(b.getId());
     }
@@ -29,7 +35,16 @@ public class UsersHandler {
         UsersDB.getAllUsers();
     }
     
-    public static void getUsersByUsername(UsersBean b) {
-        UsersDB.getUsersByUsername(b.getUsername());
+    public static Collection<UsersBean> getUsersByUsername(UsersBean b) {
+        Collection<Users> users = UsersDB.getUsersByUsername(b.getUsername());
+        Collection<UsersBean> usersBean = new ArrayList();
+        for (Users u : users) {
+            UsersBean tmp = new UsersBean();
+            tmp.setUsername(u.getUsername());
+            tmp.setId(u.getId());
+            tmp.setOccupation(u.getOccupation());
+            usersBean.add(tmp);
+        }
+        return usersBean;
     }
 }

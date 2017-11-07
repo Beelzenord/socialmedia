@@ -22,6 +22,8 @@ public class UsersBean {
     private String pass;
     private String occupation;
     private Collection<MessageBean> messages;
+    private Collection<UsersBean> otherUsers;
+    
     /**
      * Creates a new instance of UserBean
      */
@@ -67,6 +69,15 @@ public class UsersBean {
     public void setPass(String pass) {
         this.pass = pass;
     }
+
+    public Collection<UsersBean> getOtherUsers() {
+        return otherUsers;
+    }
+
+    public void setOtherUsers(Collection<UsersBean> otherUsers) {
+        this.otherUsers = otherUsers;
+    }
+    
     public void addUser(){
         UsersHandler.addUser(this);
     }
@@ -80,7 +91,7 @@ public class UsersBean {
     }
     
     public void getUsersByUsername() {
-        UsersHandler.getUsersByUsername(this);
+        otherUsers = UsersHandler.getUsersByUsername(this);
     }
     
     public void getMessagesFromUser() {

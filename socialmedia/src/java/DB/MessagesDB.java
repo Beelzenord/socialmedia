@@ -9,13 +9,14 @@ import BO.Entity.Messages;
 import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
  * @author Niklas
  */
 public class MessagesDB {
-    public static void addNewUser(Messages m){
+    public static void addNewMessage(Messages m){
         EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
         try {
             em.getTransaction().begin();
@@ -28,10 +29,22 @@ public class MessagesDB {
         }
     }
     
-    public static Collection<Messages> getMessagesFromUser(String sender) {
-        /*Query q = em.createQuery("select * from T_Messages where sender in (:namesList)"); 
-        q.setParameter("namesList", names); 
-        List students = q.list()*/
-        return null;
+    public static Collection<Messages> getMessagesFromAll(int receiver_id) {
+        EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
+        Query q = em.createNamedQuery("Messages.findFromAll");
+        q.setParameter("Receiver_id", receiver_id);
+        Collection<Messages> tmp = q.getResultList();
+        em.close();
+        return tmp;
+    }
+    
+    public static Collection<Messages> getMessagesFromOneSender(int receiver_id, int sender_id) {
+        EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
+        Query q = em.createNamedQuery("Messages.findFromOneSender");
+        q.setParameter("Receiver_id", receiver_id);
+        q.setParameter("Sender_id", sender_id);
+        Collection<Messages> tmp = q.getResultList();
+        em.close();
+        return tmp;
     }
 }
