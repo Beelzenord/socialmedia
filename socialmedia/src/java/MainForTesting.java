@@ -1,9 +1,13 @@
 
 import BO.Entity.Messages;
+import BO.Entity.PersonalLog;
 import BO.Entity.Users;
 import UI.Beans.MessageBean;
 import UI.Beans.UsersBean;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.EntityManager;
@@ -22,7 +26,7 @@ import javax.persistence.Persistence;
  */
 public class MainForTesting {
     public static void main(String[] args) {
-         /*      EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacePU");
+        /*    EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacePU");
         EntityManager em = emf.createEntityManager();
         Messages m = new Messages();
         m.setMessageText("testtext");
@@ -54,7 +58,7 @@ public class MainForTesting {
             }
         }
         System.out.println("dones");
-        */
+        *//*
         UsersBean b = new UsersBean();
         b.setUsername("u1");
         b.setSearchForUser("u1");
@@ -89,8 +93,27 @@ public class MainForTesting {
         for (MessageBean q : test) {
             System.out.println("messages: " + q.getMessageText());
         }
-        */
         
-        System.exit(0);
+        System.exit(0);*/
+        /*DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
+        Date date = new Date();
+       
+        PersonalLog pl = new PersonalLog();
+        pl.setText("Some More Text");
+        
+      //  pl.setTimePosted(date);
+        System.out.println(pl.toString());
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacePU");
+        EntityManager em = emf.createEntityManager();
+         try {
+            em.getTransaction().begin();
+            em.persist(pl);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }*/
     }
 }

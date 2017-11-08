@@ -37,7 +37,7 @@ public class UsersDB {
          return user;
     }
     
-    public static Users getUserById(int id) {
+    public static Users getUserById(Long id) {
         EntityManager em = getEntityManager();
         Users tmp = em.find(Users.class, id);
         em.close();

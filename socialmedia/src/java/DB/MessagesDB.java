@@ -29,7 +29,7 @@ public class MessagesDB {
         }
     }
     
-    public static Collection<Messages> getMessagesFromAll(int receiver_id) {
+    public static Collection<Messages> getMessagesFromAll(Long receiver_id) {
         EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
         Query q = em.createNamedQuery("Messages.findFromAll");
         q.setParameter("Receiver_id", receiver_id);
@@ -38,7 +38,7 @@ public class MessagesDB {
         return tmp;
     }
     
-    public static Collection<Messages> getMessagesFromOneSender(int receiver_id, int sender_id) {
+    public static Collection<Messages> getMessagesFromOneSender(Long receiver_id, Long sender_id) {
         EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
         Query q = em.createNamedQuery("Messages.findFromOneSender");
         q.setParameter("Receiver_id", receiver_id);

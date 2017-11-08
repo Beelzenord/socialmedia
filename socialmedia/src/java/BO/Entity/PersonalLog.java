@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class PersonalLog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String text;
     private Date timePosted;
 
@@ -43,4 +43,19 @@ public class PersonalLog {
     public void setTimePosted(Date timePosted) {
         this.timePosted = timePosted;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonalLog{" + "id=" + id + ", text=" + text + ", timePosted=" + timePosted + '}';
+    }
+    
+    
 }

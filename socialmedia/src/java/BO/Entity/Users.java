@@ -42,14 +42,14 @@ public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String username;
     private String pass;
     private String occupation;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")    
+    /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "id")    
     @OrderBy("timesent DESC")
-    private Collection<Messages> messages;
+    private Collection<Messages> messages;*/
     @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)    
     @JoinTable(name="T_Friends",  joinColumns = {         
         @JoinColumn(name="user_id2", nullable=false, updatable=false) 
@@ -59,7 +59,6 @@ public class Users implements Serializable {
     private Set<Users> usersForUserId;
 
     public Users() {
-        this.messages = new ArrayList();
     }
     
     public Set<Users> getUsersForUserId() {
@@ -70,22 +69,14 @@ public class Users implements Serializable {
         this.usersForUserId = usersForUserId;
     }
     
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     } public String getUsername() {
         return username;
-    }
-
-    public Collection<Messages> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Collection<Messages> messages) {
-        this.messages = messages;
     }
 
     public void setUsername(String username) {
