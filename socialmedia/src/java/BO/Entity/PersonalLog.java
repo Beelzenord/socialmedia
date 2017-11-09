@@ -10,12 +10,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
  *
  * @author Niklas
  */
+@NamedQueries({    
+    @NamedQuery(name = "PersonalLog.findFromAll", query = "SELECT p FROM PersonalLog p WHERE p.sender.id = :Sender_id"), 
+    @NamedQuery(name = "PersonalLog.findFromOneSender", query = "SELECT p FROM PersonalLog p WHERE  p.sender.id = :Sender_id"),
+})
 @Entity
 @Table(name="T_PersonalLog")
 public class PersonalLog {
@@ -24,6 +32,10 @@ public class PersonalLog {
     private int id;
     private String text;
     private Date timePosted;
+    
+    @ManyToOne() 
+    @JoinColumn(name="Sender_id")
+    private Users sender;
 
     public PersonalLog() {
     }
@@ -52,6 +64,14 @@ public class PersonalLog {
         this.id = id;
     }
 
+    public Users getSender() {
+        return sender;
+    }
+
+    public void setSender(Users sender) {
+        this.sender = sender;
+    }
+    
     @Override
     public String toString() {
         return "PersonalLog{" + "id=" + id + ", text=" + text + ", timePosted=" + timePosted + '}';

@@ -24,6 +24,7 @@ public class UsersBean {
     private String occupation;
     private Collection<MessageBean> messages;
     private Collection<UsersBean> otherUsers;
+    private Collection<PersonalLogBean> personalLogs;
     
     /**
      * Creates a new instance of UserBean
@@ -113,4 +114,5 @@ public class UsersBean {
     public void getMessagesFromUser() {
         //MessagesHandler.getMessagesFromUser()
     }
+    
 }
