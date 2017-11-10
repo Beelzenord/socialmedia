@@ -21,7 +21,7 @@ import javax.persistence.NamedQuery;
  */
 @NamedQueries({    
     @NamedQuery(name = "Messages.findFromAll", query = "SELECT m FROM Messages m WHERE m.receiver.id = :Receiver_id"), 
-    @NamedQuery(name = "Messages.findFromOneSender", query = "SELECT m FROM Messages m WHERE m.receiver.id = :Receiver_id AND m.receiver.id = :Sender_id"),
+    @NamedQuery(name = "Messages.findFromOneSender", query = "SELECT m FROM Messages m WHERE m.receiver.id = :Receiver_id AND m.sender.id = :Sender_id"),
 })
 @Entity
 @Table(name="T_Messages")
@@ -36,10 +36,20 @@ public class Messages {
     @JoinColumn(name="Receiver_id")
     private Users receiver;
     private String messageText;
+    private boolean isRead;
+    private boolean isDeleted;
 
     public Messages() {
     }
 
+    public Messages(Users sender, Users receiver, String messageText, boolean isRead, boolean isDeleted) {
+        this.sender = sender;
+        this.receiver = receiver;
+        this.messageText = messageText;
+        this.isRead = isRead;
+        this.isDeleted = isDeleted;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -70,6 +80,22 @@ public class Messages {
 
     public void setMessageText(String messageText) {
         this.messageText = messageText;
+    }
+
+    public boolean getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(boolean isRead) {
+        this.isRead = isRead;
+    }
+
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
     
     

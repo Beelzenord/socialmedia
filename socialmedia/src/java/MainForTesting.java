@@ -2,6 +2,7 @@
 import BO.Entity.Messages;
 import BO.Entity.PersonalLog;
 import BO.Entity.Users;
+import BO.Handlers.MessagesHandler;
 import UI.Beans.MessageBean;
 import UI.Beans.UsersBean;
 import java.text.DateFormat;
@@ -115,5 +116,17 @@ public class MainForTesting {
                 em.close();
             }
         }*/
+        
+        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacePU");
+        //EntityManager em = emf.createEntityManager();
+        UsersBean u1 = new UsersBean();
+        u1.setId(new Long(2));
+        Collection<MessageBean> beas = MessagesHandler.getMessagesFromOneSender(u1, new Long(1));
+        System.out.println("size: " + beas.size());
+        for (MessageBean b : beas) {
+            System.out.println("T: " + b.getMessageText());
+        }
+        
+        System.exit(0);
     }
 }

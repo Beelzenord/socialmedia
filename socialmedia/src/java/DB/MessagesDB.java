@@ -29,8 +29,35 @@ public class MessagesDB {
         }
     }
     
+    public static void setMessageToIsRead(Long id) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Messages m = em.find(Messages.class, id);
+            m.setIsRead(true);
+            em.merge(m);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null)
+                em.close();
+        }
+    }
+    
+    public static Messages getMessageWithId(Long id) {
+        EntityManager em = getEntityManager();
+        Messages tmp = null;
+        try {
+            tmp = em.find(Messages.class, id);
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return tmp;
+    }
+    
     public static Collection<Messages> getMessagesFromAll(Long receiver_id) {
-        EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
+        EntityManager em = getEntityManager();
         Query q = em.createNamedQuery("Messages.findFromAll");
         q.setParameter("Receiver_id", receiver_id);
         Collection<Messages> tmp = q.getResultList();
@@ -46,5 +73,9 @@ public class MessagesDB {
         Collection<Messages> tmp = q.getResultList();
         em.close();
         return tmp;
+    }
+    
+    private static EntityManager getEntityManager() {
+        return Persistence.createEntityManagerFactory("FacePU").createEntityManager();
     }
 }

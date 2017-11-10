@@ -13,6 +13,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -28,6 +29,9 @@ public class MessageBean {
     private UsersBean sender;
     private UsersBean receiver;
     private String messageText;
+    private String preview;
+    private boolean isRead;
+    private boolean isDeleted;
     private List<UsersBean> usersSelectListBeans;
     @ManagedProperty(value="#{usersBean}")
     private UsersBean usersBean;
@@ -94,6 +98,22 @@ public class MessageBean {
         this.messageText = messageText;
     }
 
+    public boolean getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(boolean isRead) {
+        this.isRead = isRead;
+    }
+
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
     public Collection<MessageBean> getMessages() {
         return messages;
     }
@@ -110,12 +130,20 @@ public class MessageBean {
         this.usersBean = usersBean;
     }
     
-    public void getMessagesFromAll(Long receiver_id) {
-        messages = MessagesHandler.getMessagesFromAll(receiver_id);
+    public void getMessagesFromAll(UsersBean b) {
+        messages = MessagesHandler.getMessagesFromAll(b);
     }
     
     public void addNewMessage() {
         MessagesHandler.addNewMessage(this);
+    }
+
+    public String getPreview() {
+        return preview;
+    }
+
+    public void setPreview(String preview) {
+        this.preview = preview;
     }
     
     public void getUsersByContains() {

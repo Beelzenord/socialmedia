@@ -60,6 +60,12 @@ public class Users implements Serializable {
 
     public Users() {
     }
+
+    public Users(String username, String pass, String occupation) {
+        this.username = username;
+        this.pass = pass;
+        this.occupation = occupation;
+    }
     
     public Set<Users> getUsersForUserId() {
         return this.usersForUserId;
