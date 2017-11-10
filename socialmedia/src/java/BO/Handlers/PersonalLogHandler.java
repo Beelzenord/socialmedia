@@ -27,7 +27,7 @@ public class PersonalLogHandler {
         pl.setSender(sender);
         PersonalLogDB.addPostToLog(pl);
     }
-    public static Collection<PersonalLog> getPostsFromOneUser(int id){
+    public static Collection<PersonalLog> getPostsFromOneUser(Long id){
         Collection<PersonalLog> tmp= PersonalLogDB.getPostsFromUser(id);
         return tmp;
     }

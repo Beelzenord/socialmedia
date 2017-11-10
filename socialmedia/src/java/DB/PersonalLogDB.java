@@ -32,7 +32,7 @@ public class PersonalLogDB {
         }
         
       }
-        public static Collection<PersonalLog> getPostsFromUser(int id){
+        public static Collection<PersonalLog> getPostsFromUser(Long id){
         EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
         Query q = em.createNamedQuery("PersonalLog.findFromOneSender");
         q.setParameter("Sender_id", id);

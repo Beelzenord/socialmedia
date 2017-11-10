@@ -24,21 +24,21 @@ import static org.slf4j.helpers.Util.report;
 public class PersonalLogBean {
     private String text;
     private Date timePosted;
-    private int id;
+    private Long id;
     
     @ManagedProperty(value="#{usersBean}")
     private UsersBean userBean;
     
-    private int sendersID;
+    private Long sendersID;
     
     
     Collection<PersonalLogBean> usersBeanCollection = new ArrayList();
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     
@@ -60,11 +60,11 @@ public class PersonalLogBean {
         this.timePosted = timePosted;
     }
 
-    public int getSendersID() {
+    public Long getSendersID() {
         return sendersID;
     }
 
-    public void setSendersID(int sendersID) {
+    public void setSendersID(Long sendersID) {
         this.sendersID = sendersID;
     }
 
