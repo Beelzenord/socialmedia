@@ -17,10 +17,9 @@
         </style>
     </h:head>
     <h:body>
-<h:body>
-    
-    
-</h:body>
+        <h:link value="Index" outcome="main" /><br/>
+        <h:link value="Send Messages" outcome="sendMessage" /><br/>
+        <h:link value="Find Posts" outcome="findPosts" /><br/>
         <h:form>   
             <h:commandButton value = "Find Messages"  >
                 <f:ajax event="click" listener="#{inboxBean.getSendersToThisUser}"/>
@@ -42,6 +41,10 @@
                 <p:column width="15">
                     <f:facet name = "header"> Message Text </f:facet> 
                     #{element.preview}
+                </p:column>
+                <p:column width="15">
+                    <f:facet name = "header"> Time Sent </f:facet> 
+                    #{element.timeSent}
                 </p:column>
                 <p:column width="6">
                     <f:facet name = "header"> IsRead </f:facet> 

@@ -8,6 +8,9 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+        <h:link value="Index" outcome="main" /><br/>
+        <h:link value="Inbox" outcome="inbox" /><br/>
+        <h:link value="Find Posts" outcome="findPosts" /><br/>
         Search for a user to send a message to 
         <h:form>
             <h:inputText id="userSearch" size="20" value="#{usersBean.searchForUser}">               

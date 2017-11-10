@@ -41,6 +41,12 @@ public class PersonalLog {
     public PersonalLog() {
     }
 
+    public PersonalLog(String text, Date timePosted, Users sender) {
+        this.text = text;
+        this.timePosted = timePosted;
+        this.sender = sender;
+    }
+
     public String getText() {
         return text;
     }

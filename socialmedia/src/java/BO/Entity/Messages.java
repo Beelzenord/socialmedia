@@ -5,6 +5,7 @@
  */
 package BO.Entity;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
@@ -38,16 +39,18 @@ public class Messages {
     private String messageText;
     private boolean isRead;
     private boolean isDeleted;
+    private Date timeSent;
 
     public Messages() {
     }
 
-    public Messages(Users sender, Users receiver, String messageText, boolean isRead, boolean isDeleted) {
+    public Messages(Users sender, Users receiver, String messageText, boolean isRead, boolean isDeleted, Date timeSent) {
         this.sender = sender;
         this.receiver = receiver;
         this.messageText = messageText;
         this.isRead = isRead;
         this.isDeleted = isDeleted;
+        this.timeSent = timeSent;
     }
     
     public Long getId() {
@@ -96,6 +99,14 @@ public class Messages {
 
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public Date getTimeSent() {
+        return timeSent;
+    }
+
+    public void setTimeSent(Date timeSent) {
+        this.timeSent = timeSent;
     }
     
     

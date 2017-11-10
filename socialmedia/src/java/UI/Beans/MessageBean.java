@@ -9,13 +9,11 @@ import BO.Handlers.MessagesHandler;
 import BO.Handlers.UsersHandler;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
 
 /**
  *
@@ -32,6 +30,7 @@ public class MessageBean {
     private String preview;
     private boolean isRead;
     private boolean isDeleted;
+    private Date timeSent;
     private List<UsersBean> usersSelectListBeans;
     @ManagedProperty(value="#{usersBean}")
     private UsersBean usersBean;
@@ -112,6 +111,14 @@ public class MessageBean {
 
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public Date getTimeSent() {
+        return timeSent;
+    }
+
+    public void setTimeSent(Date timeSent) {
+        this.timeSent = timeSent;
     }
 
     public Collection<MessageBean> getMessages() {

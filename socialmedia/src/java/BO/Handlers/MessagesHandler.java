@@ -12,6 +12,7 @@ import UI.Beans.MessageBean;
 import UI.Beans.UsersBean;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -29,6 +30,7 @@ public class MessagesHandler {
         m.setSender(sender);
         m.setIsRead(false);
         m.setIsDeleted(false);
+        m.setTimeSent(new Date());
         MessagesDB.addNewMessage(m);
     }
     
@@ -56,6 +58,7 @@ public class MessagesHandler {
                 tmp.setPreview(StringUtils.abbreviate(m.getMessageText(), 40));
                 tmp.setIsDeleted(m.getIsDeleted());
                 tmp.setIsRead(m.getIsRead());
+                tmp.setTimeSent(m.getTimeSent());
                 UsersBean receiver = new UsersBean();
                 receiver.setId(m.getReceiver().getId());
                 receiver.setUsername(m.getReceiver().getUsername());

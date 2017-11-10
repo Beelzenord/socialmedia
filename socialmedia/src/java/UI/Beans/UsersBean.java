@@ -8,12 +8,11 @@ package UI.Beans;
 import BO.Entity.Users;
 import BO.Handlers.PersonalLogHandler;
 import BO.Handlers.UsersHandler;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
 
 /**
  *
@@ -23,14 +22,14 @@ import javax.faces.model.ListDataModel;
 @SessionScoped
 public class UsersBean {
     private Long id;
+    private String otherLogUsername;
     private String username;
     private String pass;
     private String occupation;
     private String searchForUser;
-    private Collection<MessageBean> messages;
-    private Collection<UsersBean> otherUsers;
-    private DataModel presentedUsers;
+    private List<UsersBean> usersSelectListBeans;
     private Collection<PersonalLogBean> personalLogs;
+    private Collection<PersonalLogBean> otherUsersLogs;
     
     /**
      * Creates a new instance of UserBean
@@ -38,14 +37,6 @@ public class UsersBean {
     public UsersBean() {
     }
 
-    public Collection<MessageBean> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Collection<MessageBean> messages) {
-        this.messages = messages;
-    }
-    
     public Long getId() {
         return id;
     }
@@ -86,20 +77,36 @@ public class UsersBean {
         this.pass = pass;
     }
 
-    public DataModel getPresentedUsers() {
-        return presentedUsers;
+    public String getOtherLogUsername() {
+        return otherLogUsername;
     }
 
-    public void setPresentedUsers(DataModel presentedUsers) {
-        this.presentedUsers = presentedUsers;
+    public void setOtherLogUsername(String otherLogUsername) {
+        this.otherLogUsername = otherLogUsername;
     }
 
-    public Collection<UsersBean> getOtherUsers() {
-        return otherUsers;
+    public List<UsersBean> getUsersSelectListBeans() {
+        return usersSelectListBeans;
     }
 
-    public void setOtherUsers(Collection<UsersBean> otherUsers) {
-        this.otherUsers = otherUsers;
+    public void setUsersSelectListBeans(List<UsersBean> usersSelectListBeans) {
+        this.usersSelectListBeans = usersSelectListBeans;
+    }
+
+    public Collection<PersonalLogBean> getOtherUsersLogs() {
+        return otherUsersLogs;
+    }
+
+    public void setOtherUsersLogs(Collection<PersonalLogBean> otherUsersLogs) {
+        this.otherUsersLogs = otherUsersLogs;
+    }
+
+    public Collection<PersonalLogBean> getPersonalLogs() {
+        return personalLogs;
+    }
+
+    public void setPersonalLogs(Collection<PersonalLogBean> personalLogs) {
+        this.personalLogs = personalLogs;
     }
     
     public void addUser(){
@@ -125,32 +132,34 @@ public class UsersBean {
         searchForUser = "";
     }
     
-    public void sendMessageToSelectedUser() {
-        UsersBean b = (UsersBean)presentedUsers.getRowData();
-        username = b.getUsername();
-    }
-    
     public void getAllUsers() {
         UsersHandler.getAllUsers();
     }
     
-    public void getUsersByUsername() {
-        otherUsers = UsersHandler.getUsersByUsername(this);
-    }
     public  Collection<PersonalLogBean> getAllLogs(){
        this.personalLogs = PersonalLogHandler.getPostsFromOneUser(username);
        return personalLogs;
     }
     
+    public  Collection<PersonalLogBean> getLogsOfOtherUser(){
+       this.otherUsersLogs = PersonalLogHandler.getPostsFromOneUser(username);
+       return otherUsersLogs;
+    }
+    
     public void getUsersByContains() {
-        otherUsers = UsersHandler.getUsersByContains(this);
-        presentedUsers = new ListDataModel();
-        if (otherUsers != null && otherUsers.size() > 0) {
-            presentedUsers.setWrappedData(otherUsers);
+        if (searchForUser.length() > 0) {
+            Collection<UsersBean> tmp = UsersHandler.getUsersByContains(this);
+            usersSelectListBeans = new ArrayList();
+            for (UsersBean b : tmp) {
+                usersSelectListBeans.add(b);
+            }
         }
     }
     
+    public void findLogsForOtherUser() {
+        this.otherUsersLogs = PersonalLogHandler.getPostsFromOneUser(otherLogUsername);
     
+    }
     
     @Override
     public boolean equals(Object object) {
