@@ -40,4 +40,13 @@ public class PersonalLogDB {
         em.close();
         return tmp;
         }
+        
+         public static Collection<PersonalLog> getPostsFromUser(String username){
+        EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
+        Query q = em.createNamedQuery("PersonalLog.findFromOneSenderName");
+        q.setParameter("Sender_Name", username);
+        Collection<PersonalLog> tmp = q.getResultList();
+        em.close();
+        return tmp;
+        }
 }

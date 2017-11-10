@@ -23,13 +23,14 @@ import javax.persistence.Table;
 @NamedQueries({    
     @NamedQuery(name = "PersonalLog.findFromAll", query = "SELECT p FROM PersonalLog p WHERE p.sender.id = :Sender_id"), 
     @NamedQuery(name = "PersonalLog.findFromOneSender", query = "SELECT p FROM PersonalLog p WHERE  p.sender.id = :Sender_id"),
+     @NamedQuery(name = "PersonalLog.findFromOneSenderName", query = "SELECT p FROM PersonalLog p WHERE  p.sender.username = :Sender_Name"),
 })
 @Entity
 @Table(name="T_PersonalLog")
 public class PersonalLog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String text;
     private Date timePosted;
     
@@ -56,11 +57,11 @@ public class PersonalLog {
         this.timePosted = timePosted;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -31,13 +31,15 @@ public class PersonalLogHandler {
         Collection<PersonalLog> tmp= PersonalLogDB.getPostsFromUser(id);
         return tmp;
     }
+     public static Collection<PersonalLogBean> getPostsFromOneUser(String username){
+        Collection<PersonalLog> tmp= PersonalLogDB.getPostsFromUser(username);
+        return convertToPersonalLogBean(tmp);
+    }
     private static Collection<PersonalLogBean> convertToPersonalLogBean(Collection<PersonalLog> personalLogs) {
         Collection<PersonalLogBean> logBeans = new ArrayList();
         for (PersonalLog l : personalLogs) {
             PersonalLogBean tmp = new PersonalLogBean();
-            tmp.setId(l.getId());
             tmp.setText(l.getText());
-            UsersBean userBean = new UsersBean();
             tmp.setTimePosted(l.getTimePosted());
             logBeans.add(tmp);
         }

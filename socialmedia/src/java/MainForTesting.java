@@ -2,7 +2,9 @@
 import BO.Entity.Messages;
 import BO.Entity.PersonalLog;
 import BO.Entity.Users;
+import BO.Handlers.PersonalLogHandler;
 import UI.Beans.MessageBean;
+import UI.Beans.PersonalLogBean;
 import UI.Beans.UsersBean;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -27,6 +29,7 @@ import javax.persistence.Query;
  */
 public class MainForTesting {
     public static void main(String[] args) {
+        //    EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacePU");
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacePU");
         EntityManager em = emf.createEntityManager();
        /* Users u = new Users();
@@ -42,16 +45,19 @@ public class MainForTesting {
             }
         }*/
       
-         //Query q = em.createNamedQuery("Users.findByName");
-          //  q.setParameter("name", "harbinger");
-           // Users user = (Users) q.getSingleResult();
-            
-         Query find = em.createNamedQuery("PersonalLog.findFromOneSender");
+         Query q = em.createNamedQuery("Users.findByName");
+         q.setParameter("name", "harbinger");
+         Users user = (Users) q.getSingleResult();
+           // em.close();
+          
+          
+            Collection<PersonalLogBean> usersBean = PersonalLogHandler.getPostsFromOneUser("harbinger");
+        /* Query find = em.createNamedQuery("PersonalLog.findFromOneSender");
          find.setParameter("Sender_id", 5);
          
          Collection<PersonalLog> tmp = find.getResultList();
          
-         System.out.println(tmp.size());
+         System.out.println(tmp.size());*/
          
      /*       System.out.println(user.toString());
         PersonalLog pl = new PersonalLog();
@@ -106,9 +112,10 @@ public class MainForTesting {
         *//*
         UsersBean b = new UsersBean();
         b.setUsername("u1");
-        b.getUsersByUsername();
+        b.setSearchForUser("u1");
+        b.getUsersByContains();
         
-        System.out.println("lulul");
+        System.out.println("lulul: " + b.getOtherUsers().size());
         Collection<UsersBean> t = b.getOtherUsers();
         for (UsersBean a : t) {
             System.out.println("test: " + a.getUsername());
@@ -116,6 +123,7 @@ public class MainForTesting {
         
         System.out.println("again");
         
+        /*
         MessageBean mb = new MessageBean();
         mb.getMessagesFromAll(2);
         Collection<MessageBean> test = mb.getMessages();
@@ -138,6 +146,8 @@ public class MainForTesting {
         }
         
         System.exit(0);*/
+        /*DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
+        Date date = new Date();
        // DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
        // Date date = new Date();
        
@@ -164,8 +174,13 @@ public class MainForTesting {
             pl.setSender(user);
             em.persist(pl);
             em.getTransaction().commit();
-            System.exit(0);
-           */
-       
     }
 }
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }*/
+           
+    }}
+       

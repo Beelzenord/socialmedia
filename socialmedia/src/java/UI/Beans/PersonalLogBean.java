@@ -78,7 +78,6 @@ public class PersonalLogBean {
     }
     
     public void addPost() {
-      //  String tmp = userBean.getUsername();
        PersonalLogHandler.addPostToLog(this);
     }
     

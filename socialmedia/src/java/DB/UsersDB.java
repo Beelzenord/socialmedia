@@ -38,22 +38,10 @@ public class UsersDB {
          return user;
     }
     
-    public static Users getUserById(int id) {
+    public static Users getUserById(Long id) {
         EntityManager em = getEntityManager();
         Users tmp = em.find(Users.class, id);
         em.close();
-        return tmp;
-    }
-    
-    public static Collection<Users> getUsersById(int id) {
-        EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
-        Query q = em.createNamedQuery("Users.findById");
-        q.setParameter("id", id);
-
-        Collection<Users> tmp = q.getResultList();
-        for (Users uw : tmp) {
-            System.out.println("names: " + uw.getUsername());
-        }
         return tmp;
     }
     
@@ -62,7 +50,7 @@ public class UsersDB {
         Query q = em.createNamedQuery("Users.findAll");
         Collection<Users> tmp = q.getResultList();
         return tmp;
-    }
+    } 
     
     
     
@@ -70,11 +58,15 @@ public class UsersDB {
         EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
         Query q = em.createNamedQuery("Users.findByName");
         q.setParameter("name", name);
-
         Collection<Users> tmp = q.getResultList();
-        for (Users uw : tmp) {
-            System.out.println("names: " + uw.getUsername());
-        }
+        return tmp;
+    }
+    
+    public static Collection<Users> getUsersByContains(String searchString) {
+        EntityManager em = getEntityManager();
+        Query q = em.createNamedQuery("Users.findByContains");
+        q.setParameter("searchString", "%" + searchString + "%");
+        Collection<Users> tmp = q.getResultList();
         return tmp;
     }
     

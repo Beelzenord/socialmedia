@@ -21,7 +21,7 @@ public class MessagesHandler {
     
     public static void addNewMessage(MessageBean bean) {
         Users receiver = UsersHandler.getUserById(bean.getReceiver());
-        Users sender = UsersHandler.getUserById(bean.getSender());
+        Users sender = UsersHandler.getUserById(bean.getUsersBean());
         Messages m = new Messages();
         m.setMessageText(bean.getMessageText());
         m.setReceiver(receiver);
@@ -29,12 +29,12 @@ public class MessagesHandler {
         MessagesDB.addNewMessage(m);
     }
     
-    public static Collection<MessageBean> getMessagesFromAll(int receiver_id) {
+    public static Collection<MessageBean> getMessagesFromAll(Long receiver_id) {
         Collection<Messages> messages = MessagesDB.getMessagesFromAll(receiver_id);
         return convertToMessageBean(messages);
     }
     
-    public static Collection<MessageBean> getMessagesFromOneSender(int receiver_id, int sender_id) {
+    public static Collection<MessageBean> getMessagesFromOneSender(Long receiver_id, Long sender_id) {
         Collection<Messages> messages = MessagesDB.getMessagesFromOneSender(receiver_id, sender_id);
         return convertToMessageBean(messages);
     }
