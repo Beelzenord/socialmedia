@@ -3,7 +3,9 @@ import BO.Entity.Messages;
 import BO.Entity.PersonalLog;
 import BO.Entity.Users;
 import BO.Handlers.MessagesHandler;
+import BO.Handlers.PersonalLogHandler;
 import UI.Beans.MessageBean;
+import UI.Beans.PersonalLogBean;
 import UI.Beans.UsersBean;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -14,6 +16,7 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,9 +30,57 @@ import javax.persistence.Persistence;
  */
 public class MainForTesting {
     public static void main(String[] args) {
-        /*    EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacePU");
+        //    EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacePU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacePU");
         EntityManager em = emf.createEntityManager();
-        Messages m = new Messages();
+       /* Users u = new Users();
+        u.setUsername("u4");
+        u.setPass("u4");
+        try {
+            em.getTransaction().begin();
+            em.persist(u);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }*/
+      
+         Query q = em.createNamedQuery("Users.findByName");
+         q.setParameter("name", "harbinger");
+         Users user = (Users) q.getSingleResult();
+           // em.close();
+          
+          
+            Collection<PersonalLogBean> usersBean = PersonalLogHandler.getPostsFromOneUser("harbinger");
+        /* Query find = em.createNamedQuery("PersonalLog.findFromOneSender");
+         find.setParameter("Sender_id", 5);
+         
+         Collection<PersonalLog> tmp = find.getResultList();
+         
+         System.out.println(tmp.size());*/
+         
+     /*       System.out.println(user.toString());
+        PersonalLog pl = new PersonalLog();
+        pl.setSender(user);
+        pl.setText("from main");
+        pl.setTimePosted(new Date());
+        
+        try {
+            em.getTransaction().begin();
+            em.persist(pl);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }*/
+        
+        
+        
+        System.out.println("end of the line");
+        System.exit(0);
+        /*Messages m = new Messages();
         m.setMessageText("testtext");
         Users u = new Users();
         Users u2 = new Users();
@@ -98,19 +149,34 @@ public class MainForTesting {
         System.exit(0);*/
         /*DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
         Date date = new Date();
+       // DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
+       // Date date = new Date();
        
-        PersonalLog pl = new PersonalLog();
-        pl.setText("Some More Text");
+       
         
       //  pl.setTimePosted(date);
-        System.out.println(pl.toString());
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacePU");
-        EntityManager em = emf.createEntityManager();
-         try {
+        
+      
+        /*    EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
+          //  Query q = em.createNamedQuery("Users.findByName");
+          //  q.setParameter("name", "Donald");
+         //   Users user = (Users) q.getSingleResult();
+            //em.close();
+            //System.out.println(user.toString());
+            PersonalLog pl = new PersonalLog();
+            pl.setText("Some More Text");
+            pl.setTimePosted(date);
+       //     pl.setSender(user);
             em.getTransaction().begin();
+            Query q = em.createNamedQuery("Users.findByName");
+            q.setParameter("name", "Donald");
+            Users user = (Users) q.getSingleResult();
+            pl.setSender(user);
             em.persist(pl);
             em.getTransaction().commit();
+    }
+}
         } finally {
             if (em != null) {
                 em.close();
@@ -130,3 +196,6 @@ public class MainForTesting {
         System.exit(0);
     }
 }
+           
+    
+       

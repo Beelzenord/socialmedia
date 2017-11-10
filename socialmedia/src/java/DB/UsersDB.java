@@ -34,6 +34,7 @@ public class UsersDB {
          Query q = em.createNamedQuery("Users.findByName");
          q.setParameter("name", u.getUsername());
          Users user = (Users) q.getSingleResult();
+         em.close();
          return user;
     }
     
@@ -50,6 +51,8 @@ public class UsersDB {
         Collection<Users> tmp = q.getResultList();
         return tmp;
     } 
+    
+    
     
     public static Collection<Users> getUsersByUsername(String name) {
         EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();

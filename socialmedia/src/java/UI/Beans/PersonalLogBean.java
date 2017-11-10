@@ -6,9 +6,14 @@
 package UI.Beans;
 
 import BO.Handlers.PersonalLogHandler;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
+import static org.slf4j.helpers.Util.report;
 
 /**
  *
@@ -19,7 +24,26 @@ import javax.faces.bean.SessionScoped;
 public class PersonalLogBean {
     private String text;
     private Date timePosted;
+    private int id;
+    
+    @ManagedProperty(value="#{usersBean}")
+    private UsersBean userBean;
+    
+    private int sendersID;
+    
+    
+    Collection<PersonalLogBean> usersBeanCollection = new ArrayList();
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
+    
     public String getText() {
         return text;
     }
@@ -35,8 +59,34 @@ public class PersonalLogBean {
     public void setTimePosted(Date timePosted) {
         this.timePosted = timePosted;
     }
+
+    public int getSendersID() {
+        return sendersID;
+    }
+
+    public void setSendersID(int sendersID) {
+        this.sendersID = sendersID;
+    }
+
+    public Collection<PersonalLogBean> getUsersBean() {
+        return usersBeanCollection;
+    }
+
+    public void setUsersBean(Collection<PersonalLogBean> usersBean) {
+        this.usersBeanCollection = usersBean;
+    
+    }
     
     public void addPost() {
-        PersonalLogHandler.addPostToLog(this);
+       PersonalLogHandler.addPostToLog(this);
     }
+    
+    public UsersBean getUserBean() {
+        return userBean;
+    }
+
+    public void setUserBean(UsersBean userBean) {
+        this.userBean = userBean;
+    }
+             
 }

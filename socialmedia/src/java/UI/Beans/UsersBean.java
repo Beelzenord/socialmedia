@@ -6,6 +6,7 @@
 package UI.Beans;
 
 import BO.Entity.Users;
+import BO.Handlers.PersonalLogHandler;
 import BO.Handlers.UsersHandler;
 import java.util.Collection;
 import javax.faces.bean.ManagedBean;
@@ -29,6 +30,7 @@ public class UsersBean {
     private Collection<MessageBean> messages;
     private Collection<UsersBean> otherUsers;
     private DataModel presentedUsers;
+    private Collection<PersonalLogBean> personalLogs;
     
     /**
      * Creates a new instance of UserBean
@@ -135,6 +137,10 @@ public class UsersBean {
     public void getUsersByUsername() {
         otherUsers = UsersHandler.getUsersByUsername(this);
     }
+    public  Collection<PersonalLogBean> getAllLogs(){
+       this.personalLogs = PersonalLogHandler.getPostsFromOneUser(username);
+       return personalLogs;
+    }
     
     public void getUsersByContains() {
         otherUsers = UsersHandler.getUsersByContains(this);
@@ -163,4 +169,5 @@ public class UsersBean {
     
     
     
+
 }

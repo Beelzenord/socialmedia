@@ -37,8 +37,19 @@ public class UsersHandler {
         return UsersDB.getUserById(b.getId());
     }
     
+    public static void getUsersById(UsersBean b) {
+      //  UsersDB.getUsersById(b.getId());
+    }
+    
+    
     public static void getAllUsers() {
         UsersDB.getAllUsers();
+    }
+    public static Users getUserbyUsername(UsersBean b){
+        Users tmp = new Users();
+        tmp.setUsername(b.getUsername());
+        tmp = UsersDB.loginUser(tmp);
+        return tmp;
     }
     
     public static Collection<UsersBean> getUsersByUsername(UsersBean b) {
