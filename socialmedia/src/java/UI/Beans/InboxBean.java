@@ -18,6 +18,10 @@ import javax.faces.model.ListDataModel;
 /**
  *
  * @author Niklas
+ * The InboxBean is used to move information to and from inbox.xhtml.
+ * InboxBean has a @ManagedProperty of both UsersBean and MessageBean to 
+ * gain access to information stored in those beans. MessageHandler is used to
+ * retrieve and send information to the database. 
  */
 @ManagedBean
 @SessionScoped

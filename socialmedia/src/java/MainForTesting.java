@@ -47,12 +47,12 @@ public class MainForTesting {
         }*/
       
          Query q = em.createNamedQuery("Users.findByName");
-         q.setParameter("name", "harbinger");
+         q.setParameter("name", "u1 ");
          Users user = (Users) q.getSingleResult();
            // em.close();
           
           
-            Collection<PersonalLogBean> usersBean = PersonalLogHandler.getPostsFromOneUser("harbinger");
+            Collection<PersonalLogBean> usersBean = PersonalLogHandler.getPostsFromOneUser("u1");
         /* Query find = em.createNamedQuery("PersonalLog.findFromOneSender");
          find.setParameter("Sender_id", 5);
          
@@ -79,7 +79,6 @@ public class MainForTesting {
         
         
         System.out.println("end of the line");
-        System.exit(0);
         /*Messages m = new Messages();
         m.setMessageText("testtext");
         Users u = new Users();

@@ -19,6 +19,11 @@ import javax.persistence.NamedQuery;
 /**
  *
  * @author Niklas
+ * This entity is a representation of a message sent from one user to another. 
+ * A message has an id, a body message, the sender entity and the receiver entity.
+ * A time stamp is taken when the message is sent and stored in the message entity.
+ * The message and be read or not read as well as deleted or not delete, this
+ * is marked with booleans. 
  */
 @NamedQueries({    
     @NamedQuery(name = "Messages.findFromAll", query = "SELECT m FROM Messages m WHERE m.receiver.id = :Receiver_id"), 

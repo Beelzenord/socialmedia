@@ -28,6 +28,9 @@ import javax.persistence.OrderBy;
 /**
  *
  * @author fauzianordlund
+ * This entity represents Users in the database. 
+ * A user can send messages to other users and create posts to their log.
+ * The user entity has an id, an occupation, a username and a password.
  */
 @NamedQueries({    
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),    

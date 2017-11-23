@@ -19,6 +19,9 @@ import javax.persistence.Table;
 /**
  *
  * @author Niklas
+ * This entity is a representation of a post made to a log of a user. 
+ * A new post has an id, a body text, the time it was posted, the the user 
+ * who posted it. 
  */
 @NamedQueries({    
     @NamedQuery(name = "PersonalLog.findFromAll", query = "SELECT p FROM PersonalLog p WHERE p.sender.id = :Sender_id"), 

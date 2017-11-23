@@ -18,6 +18,8 @@ import static org.slf4j.helpers.Util.report;
 /**
  *
  * @author Niklas
+ * The PersonalLogBean is used to create new posts to a users log. The PersonalLogBean
+ * is also used to represent the PersonalLog entity, much like a viewmodel.
  */
 @ManagedBean
 @SessionScoped

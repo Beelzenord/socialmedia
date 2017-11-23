@@ -14,8 +14,13 @@ import javax.persistence.Query;
 /**
  *
  * @author Niklas
+ * MessagesDB is used to access the database for the Messages entity.
  */
 public class MessagesDB {
+    /**
+     * Adds a new Message to the database.
+     * @param m The Message to be added to the database.
+     */
     public static void addNewMessage(Messages m){
         EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
         try {
@@ -29,6 +34,10 @@ public class MessagesDB {
         }
     }
     
+    /**
+     * Sets the IsRead attribute of a Message to true.
+     * @param id The ID of the Message.
+     */
     public static void setMessageToIsRead(Long id) {
         EntityManager em = getEntityManager();
         try {
@@ -43,6 +52,11 @@ public class MessagesDB {
         }
     }
     
+    /**
+     * Finds a Message by search for the ID.
+     * @param id The ID of the Message to be searched for.
+     * @return The Message that was found.
+     */
     public static Messages getMessageWithId(Long id) {
         EntityManager em = getEntityManager();
         Messages tmp = null;
@@ -56,25 +70,51 @@ public class MessagesDB {
         return tmp;
     }
     
+    /**
+     * Finds all Messages directed at a receiver.
+     * @param receiver_id The ID of the receiver.
+     * @return A Collection of Messages found. 
+     */
     public static Collection<Messages> getMessagesFromAll(Long receiver_id) {
         EntityManager em = getEntityManager();
-        Query q = em.createNamedQuery("Messages.findFromAll");
-        q.setParameter("Receiver_id", receiver_id);
-        Collection<Messages> tmp = q.getResultList();
-        em.close();
-        return tmp;
+        try {
+            Query q = em.createNamedQuery("Messages.findFromAll");
+            q.setParameter("Receiver_id", receiver_id);
+            Collection<Messages> tmp = q.getResultList();
+            return tmp;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+
     }
     
+    /**
+     * Finds all Message directed at a single user from a single user. 
+     * @param receiver_id The ID of the receiver.
+     * @param sender_id The ID of the sender.
+     * @return A Collection of all Messages Found.
+     */
     public static Collection<Messages> getMessagesFromOneSender(Long receiver_id, Long sender_id) {
         EntityManager em = Persistence.createEntityManagerFactory("FacePU").createEntityManager();
-        Query q = em.createNamedQuery("Messages.findFromOneSender");
-        q.setParameter("Receiver_id", receiver_id);
-        q.setParameter("Sender_id", sender_id);
-        Collection<Messages> tmp = q.getResultList();
-        em.close();
-        return tmp;
+        try {
+            Query q = em.createNamedQuery("Messages.findFromOneSender");
+            q.setParameter("Receiver_id", receiver_id);
+            q.setParameter("Sender_id", sender_id);
+            Collection<Messages> tmp = q.getResultList();
+            return tmp;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
     
+    /**
+     * The EntityManager needed to access the database.
+     * @return The EntityManager needed to access the database.
+     */
     private static EntityManager getEntityManager() {
         return Persistence.createEntityManagerFactory("FacePU").createEntityManager();
     }

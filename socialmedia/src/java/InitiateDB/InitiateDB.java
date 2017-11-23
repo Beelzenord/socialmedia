@@ -1,3 +1,5 @@
+package InitiateDB;
+
 
 import BO.Entity.Messages;
 import BO.Entity.PersonalLog;
@@ -18,6 +20,8 @@ import javax.persistence.Persistence;
 /**
  *
  * @author Niklas
+ * Create a new database with initial tuples in the tables.
+ * In persistence.xml set Table Generation Strategy to "Create".
  */
 public class InitiateDB {
     public static void main(String[] args) {
@@ -44,9 +48,6 @@ public class InitiateDB {
         PersonalLog p2 = new PersonalLog("First log from u2", new Date(), u2);
         PersonalLog p3 = new PersonalLog("Second log from u2", new Date(), u2);
         PersonalLog p4 = new PersonalLog("First log from u3", new Date(), u3);
-        
-        
-      //  pl.setTimePosted(date);
         
         try {
             em.getTransaction().begin();

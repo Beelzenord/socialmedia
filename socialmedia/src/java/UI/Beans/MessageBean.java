@@ -18,6 +18,10 @@ import javax.faces.bean.SessionScoped;
 /**
  *
  * @author Niklas
+ * The MessageBean is used to move information to and from sendMessages.xhtml.
+ * MessageBean can use the MessagesHandler to create new Messages and send them to
+ * the database. The UsersHandler is used to find users to send messages to. The 
+ * MessageBean is also used to represent Message entity, much like a viewmodel.
  */
 @ManagedBean
 @SessionScoped

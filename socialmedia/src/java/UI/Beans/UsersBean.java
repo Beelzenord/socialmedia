@@ -17,6 +17,10 @@ import javax.faces.bean.SessionScoped;
 /**
  *
  * @author fauzianordlund
+ * The UsersBean can handle information concerning Uesrs. For example searching
+ * for a user in the database and logging in a user using the UsersHandler. The 
+ * UsersBean is also used to represent the Users entity, much like a viewmodel.
+ * The UsersBean is also used to send personal logs to the html pages.
  */
 @ManagedBean
 @SessionScoped
@@ -173,10 +177,5 @@ public class UsersBean {
         }
         return true;
     }
-
-
-    
-    
-    
 
 }
